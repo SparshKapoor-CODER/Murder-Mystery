@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Murder Mystery: The Case of William Harper</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-search"></i> Murder Mystery: The Case of William Harper</h1>
+            <p class="subtitle">Unravel the Mystery. Follow the Clues. Solve the Crime.</p>
+            
+            <div class="game-stats">
+                <div class="stat-card">
+                    <i class="fas fa-brain"></i>
+                    <span>Difficulty: Medium</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-clock"></i>
+                    <span>Playtime: 2-4 Hours</span>
+                </div>
+                <div class="stat-card">
+                    <i class="fas fa-users"></i>
+                    <span>Players: 1-6</span>
+                </div>
+            </div>
+        </header>
+        
+        <div class="game-container">
+            <div class="game-content">
+                <div class="section-title">
+                    <i class="fas fa-map-marker-alt"></i>
+                    <h2 id="location-name">Study</h2>
+                </div>
+                
+                <div class="location-image">
+                    <img id="location-img" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='600' height='400' viewBox='0 0 600 400'%3E%3Crect width='600' height='400' fill='%231a1a2e'/%3E%3Cpath d='M200,200 L400,200 L450,300 L150,300 Z' fill='%230f3460' stroke='%23e94560' stroke-width='2'/%3E%3Ccircle cx='300' cy='150' r='30' fill='%23ffd700'/%3E%3Crect x='250' y='220' width='100' height='80' fill='%23333'/%3E%3C/svg%3E" alt="Study">
+                </div>
+                
+                <div class="location-info" id="location-description">
+                    You stand in the opulent study. The scent of cigar smoke and expensive whiskey lingers. William's body has been removed, but blood stains the Persian rug. Snow falls silently outside the shattered window.
+                </div>
+                
+                <div class="section-title">
+                    <i class="fas fa-search"></i>
+                    <h2>Clues at this Location</h2>
+                </div>
+                
+                <div class="clues-container" id="clues-container">
+                    <!-- Clues will be inserted by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="game-sidebar">
+                <div class="section-title">
+                    <i class="fas fa-user-friends"></i>
+                    <h2>Suspects</h2>
+                </div>
+                
+                <div class="characters-container" id="suspects-container">
+                    <!-- Suspects will be inserted by JavaScript -->
+                </div>
+                
+                <div class="section-title">
+                    <i class="fas fa-briefcase"></i>
+                    <h2>Your Evidence</h2>
+                </div>
+                
+                <div class="inventory-container" id="inventory-container">
+                    <p>No evidence collected yet</p>
+                </div>
+                
+                <div class="section-title">
+                    <i class="fas fa-map"></i>
+                    <h2>Navigate</h2>
+                </div>
+                
+                <div class="navigation">
+                    <button class="nav-btn" data-location="study">Study</button>
+                    <button class="nav-btn" data-location="office">Office</button>
+                    <button class="nav-btn" data-location="garden">Garden</button>
+                    <button class="nav-btn" data-location="dining">Dining Hall</button>
+                </div>
+                
+                <button id="accuse-btn" class="accuse-btn">
+                    <i class="fas fa-gavel"></i> Accuse a Suspect
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Modals -->
+    <div id="clue-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="clue-modal-title">Clue Name</h2>
+            <img id="clue-modal-img" src="" alt="Clue" class="modal-image">
+            <p id="clue-modal-description"></p>
+            <div id="clue-interaction"></div>
+        </div>
+    </div>
+    
+    <div id="suspect-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2 id="suspect-modal-title">Suspect Name</h2>
+            <img id="suspect-modal-img" src="" alt="Suspect" class="modal-image">
+            <div class="suspect-details">
+                <p><strong>Relationship:</strong> <span id="suspect-relationship"></span></p>
+                <p><strong>Alibi:</strong> <span id="suspect-alibi"></span></p>
+                <p><strong>Status:</strong> <span id="suspect-status"></span></p>
+            </div>
+        </div>
+    </div>
+    
+    <div id="accuse-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Accuse a Suspect</h2>
+            <p>Who killed William Harper? Present your evidence!</p>
+            
+            <div class="accuse-form">
+                <label for="suspect-select">Select Suspect:</label>
+                <select id="suspect-select">
+                    <option value="">Choose a suspect</option>
+                    <option value="Eleanor Harper">Eleanor Harper</option>
+                    <option value="Richard Vance">Richard Vance</option>
+                    <option value="Clara Bennett">Clara Bennett</option>
+                    <option value="Michael Reed">Michael Reed</option>
+                </select>
+                
+                <label for="motive">Motive:</label>
+                <input type="text" id="motive" placeholder="Why did they do it?">
+                
+                <label for="weapon">Weapon:</label>
+                <input type="text" id="weapon" placeholder="How was it done?">
+                
+                <button id="submit-accusation">Submit Accusation</button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="result-modal" class="modal">
+        <div class="modal-content">
+            <h2 id="result-title">Case Solved!</h2>
+            <div id="result-content"></div>
+            <button id="play-again">Play Again</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
